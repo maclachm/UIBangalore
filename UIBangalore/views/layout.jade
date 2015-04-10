@@ -5,14 +5,22 @@ html
 
     link(rel='stylesheet', href='/stylesheets/uikit.min.css')
     link(rel='stylesheet', href='/stylesheets/leaflet.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
     
-
   body
+
+
+
     nav(class="uk-navbar")
       a(class="uk-navbar-brand") Urban Informatics
       ul(class="uk-navbar-nav")
         li(class="uk-active"): a about
-        li(class="uk-active"): a rentals
+        li(class="uk-active"): a partners
+        li(class="uk-active"): a contact
+      div(class="uk-navbar-center" id="layerSearch")
+        form(class="uk-form uk-margin-remove uk-display-inline-block" action='data' method='get')
+          input(type="search" name="name" value="")
+
 
     block scripts
     block content
