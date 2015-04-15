@@ -12,12 +12,22 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'UI Bangalore' });
 });
 
+router.get('/map', function(req, res) {
+  res.render('map', { title: 'UI Bangalore' });
+});
+
+router.get('/data', function(req, res, next) {
+  res.render('map', { title: 'UI Bangalore' });
+  next();
+});
+
 router.get('/data', function(req, res) {
     var db = req.db;
 
-    //names = req.query.data
-    //console.log(names)
-    name = req.query.name
+
+    var queryName = req.query.name;
+
+    queryName = queryName.replace(/['"\\;{}]$/g,'') // strip misc/malicious chars
 
     db.get('features').find( {"properties.Name" : {$eq: name }},  function (err, items) {
         res.json(items);

@@ -11,16 +11,14 @@ html
 
 
 
-    nav(class="uk-navbar")
+    nav(class="uk-navbar" data-uk-scrollspy="{cls:'uk-animation-slide-bottom', target:'a', delay:100}")
       a(class="uk-navbar-brand") Urban Informatics
-      ul(class="uk-navbar-nav")
-        li(class="uk-active"): a about
-        li(class="uk-active"): a partners
-        li(class="uk-active"): a contact
-      div(class="uk-navbar-center" id="layerSearch")
-        form(class="uk-form uk-margin-remove uk-display-inline-block" action='data' method='get')
-          input(type="search" name="name" value="")
+      ul(class="uk-navbar-nav" )
+        li(class="uk-navbar-nav"): a about
+        li(class="uk-navbar-nav"): a partners
+        li(class="uk-navbar-nav"): a contact
 
 
-    block scripts
+    block scripts    
     block content
+    block map
