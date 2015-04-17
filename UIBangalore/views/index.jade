@@ -1,0 +1,20 @@
+extends layout
+
+block scripts
+
+	script(src='/javascripts/jquery-2.1.3.min.js')
+	//script(src='/javascripts/leaflet.js')
+	script(src='/javascripts/uikit.min.js')
+	//script(src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0")
+	script(src="/javascripts/client.js")
+	script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRiLzoPGoUOXwd0UFh-ivscYbEfoHVi8g")
+
+block content
+
+	form(action="data" method="get" class="uk-form uk-margin-remove" data-uk-scrollspy="{cls:'uk-animation-slide-left', target:'#layerSearch', delay:100}")
+		div(id="main" class="uk-container")
+			input(id="layerSearch" class=".uk-form-width-medium uk-width-3-5 uk-align-center" name="name" type="search" value="" placeholder="search")
+			input(type="radio" name="Locality")
+
+
+

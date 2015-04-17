@@ -6,53 +6,27 @@ block scripts
     script(src='/javascripts/leaflet.js')
     script(src='/javascripts/uikit.min.js')
     script(src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0")
+    script(src="/javascripts/client.js")
 
 block map
 
-  div(class="uk-container"): #map(style='height: 400px;' )    
-  script.
+    a(class="uk-navbar-brand locality") #{title}
+    div(class="uk-container"): #map(style='height: 400px;' )    
 
-    var map = L.map("map").setView([12.9667, 77.5667], 13);
-    var layer = new L.StamenTileLayer("toner-lite");
-    map.addLayer(layer);
+    script.
 
-    $('form').submit(function(event) {
-    // Stop the browser from submitting the form.
-    event.preventDefault();
+        var point = [#{basePoint}]
+        var objectLayer = !{featureObject}
+        var guidanceValues = !{guidanceObject}
 
-    val = $('form input').val()
+        var map = L.map("map").setView(point, 13)
+        var layer = new L.StamenTileLayer("toner-lite")
+        map.addLayer(layer)
 
-    request(val)
-
-    });
-
-    function request(text) {
-          $.ajax(
-            {
-              type: 'GET',
-              url: '/data',
-              dataType: 'json',
-              data: {name: text},
-              contentType: 'application/json; charset=utf-8',
-              success: function (result) {
-                parseResponse(result)
-              },
-              error: function (req, status, error) {
-                alert('Unable to get data');
-              }
-            });
-        }
+        var popup = L.popup()
+            .setLatLng(L.latLng(objectLayer[0].geometry.coordinates[0]) ) //add popup with guidance values
+            .setContent(/*JSON.stringify(guidanceValues)*/ 'hello');
+            //.openOn(map);
         
-    function parseResponse(data) {
 
-      //console.log(data)
-
-      layer1 = new L.GeoJSON();
-      layer1.on('data', function(e) {
-        e.layer.setStyle({ color:  '#DD8B12', weight: 2, fill: true, fillColor: '#DD8B12' });
-      });
-      layer1.addData(data);
-      map.addLayer(layer1);
-      map.fitBounds(layer1.getBounds(), animate=true);
-
-    }
+        window.onload = parseResponse(objectLayer);
