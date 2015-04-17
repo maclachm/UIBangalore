@@ -10,14 +10,24 @@ block scripts
 
 block map
 
-    a(class="uk-navbar-brand locality") #{title}
-    div(class="uk-container"): #map(style='height: 400px;' )    
+    //a(class="uk-navbar-brand locality") #{title}
+    //div(class="uk-panel")
+    //    h3(class="uk-panel-title") #{title}
+
+    div(class="uk-container")
+        table(class="uk-table uk-table-striped" id="GVtable")
+            tr
+                each val in ["Locality", "Residential Sites / Converted/BBMP", "Apartments in BDA/HSBC/CITB/"]
+                    th= val
+
+    div(class="uk-container"): #map(style='height: 400px;' )
+    
 
     script.
 
         var point = [#{basePoint}]
         var objectLayer = !{featureObject}
-        var guidanceValues = !{guidanceObject}
+        var guidanceValues =!{guidanceObject}
 
         var map = L.map("map").setView(point, 13)
         var layer = new L.StamenTileLayer("toner-lite")
@@ -29,4 +39,24 @@ block map
             //.openOn(map);
         
 
-        window.onload = parseResponse(objectLayer);
+        window.onload = function() {
+            parseResponse(objectLayer);
+            drawTable(guidanceValues);
+        }
+
+        function drawTable(data) {
+            drawRow(data[0])
+            //for (var i = 0; i < data.length; i++) {
+            //drawRow(arr[0]);
+             //   }
+        }
+
+        function drawRow(rowData) {
+            var row = $("<tr />")
+            $("#GVtable").append(row); //this will append tr element to table... keep its reference for a while since we will add cels into it
+            row.append($("<td>" + rowData["VILLAGE/AREA/ROAD"] + "</td>"));
+            row.append($("<td>" + rowData["Residential Sites Coming under Converted/BBMP - Rs. per Sq. Meter"] + "</td>"));
+            row.append($("<td>" + rowData["Apartment/Flats Constructed in BDA/HSBC/CITB/ Approved by City Development Authority Sites: Marble/Granite/Wooden - Super Buildup Area  - Rs. per Sq. Meter"]+ "</td>"));
+        }
+
+
