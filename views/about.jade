@@ -1,0 +1,95 @@
+doctype html
+html
+
+  head
+    title Urban Informatics 2015
+
+    link(rel='stylesheet', href='/stylesheets/uikit.min.css')
+
+    script(src='/javascripts/jquery-2.1.3.min.js')
+
+    script(src='/javascripts/uikit.min.js')
+    // Tooltip CSS
+    link(rel='stylesheet', type='text/css', href='/stylesheets/tooltip.min.css')
+    // Tooltip Javascript
+    script(src='/javascripts/tooltip.min.js')
+
+    link(rel='stylesheet', href='/stylesheets/uikit.min.css')
+
+    link(rel='stylesheet', href='/stylesheets/leaflet.css')
+
+    link(rel='stylesheet', href='/stylesheets/style.css')
+
+    link(rel='stylesheet', href='/stylesheets/uibangalore.css')
+
+  body
+    nav(class="uk-navbar" id="primaryNav" data-uk-scrollspy="{cls:'uk-animation-slide-bottom', target:'a', delay:100}")
+      a(class="uk-navbar-brand" href='/')
+        strong
+          font(size='5') Urban Informatics
+      ul(class="uk-navbar-nav" style="float:right" )
+        block icon
+        li(class="uk-navbar-nav"): a(href='/about')
+          b about
+        li(class="uk-navbar-nav"): a(href='/methodology')
+          b methodology
+        li(class="uk-navbar-nav"): a(href='/contact')
+          b contact us
+    hr
+    .uk-grid
+      .uk-width-medium-1-2
+        .uk-panel.uk-panel-space.uk-panel-divider
+          h3.uk-panel-title Problem
+          |                            Currently, a property buyer in Bangalore does not have a clear and transparent source for property pricing information. While available online, property pricing information is often incomplete, vague, or inconsistent. Further, there is not yet an adequate system to capture true property prices in Bangalore.
+          p
+          |                            Bangalore's government is likewise disadvantaged by an absence of clear property pricing information.
+          span(data-uk-tooltip='', title='government-set minimum property values')
+            strong Guidance values
+          |  are supposed to reflect market values but rarely correlate with
+          span(data-uk-tooltip='', title='Also known as "registration values"')
+            strong reported purchase prices
+          | . Guidance values also inform
+          span(data-uk-tooltip='', title='A type of property tax')
+            strong stamp taxes
+          | . Buyers thus have a perverse incentive to under-report their purchase price to diminish their stamp tax expenses.
+        .uk-panel.uk-panel-space.uk-panel-divider
+          h3.uk-panel-title Goal
+          |                        To address these issues, our team is designing a publicly accessible web interface to visualize four different sets of property valuations in Bangalore's localities. We hope to increase transparency and facilitate property valuation by better capturing property values, benefiting both investors and the city government.
+        .uk-panel.uk-panel-space.uk-panel-divider
+          h3.uk-panel-title Data Sources
+          table.uk-table
+            thead
+            tbody
+              tr
+                td
+                  a(href='http://www.magicbricks.com', target='_blank') Magic Bricks
+                td
+                  a(href='http://www.realtycompass.com', target='_blank') Realty Compass
+                td
+                  a(href='http://www.99acres.com/', target='_blank') 99 Acres
+              tr
+        .uk-panel.uk-panel-space.uk-panel-divider
+          h3.uk-panel-title Partners
+          table.uk-table.uk-text-center
+            thead
+              tr
+                th
+                  a(href='http://iihs.co.in/', target='_blank') Indian Institute of Human Settlements
+                th
+                  a(href='http://www.iiitb.ac.in/', target='_blank') Indian Institute of Information Technology Bangalore
+                th
+                  a(href='http://www.iimb.ernet.in/initiatives/iimb-creri/', target='_blank') Indian Institute of Management
+            tbody.uk-text-left
+              tr
+                td
+                  a(href='http://iihs.co.in/about/people/arindam-jana/', target='_blank') Arindam Jana
+                td
+                  a(href='http://www.iiitb.ac.in/people/faculty/content/52', target='_blank') Amit Prakash
+                td
+                  a(href='http://www.iimb.ernet.in/initiatives/iimb-creri/team-members', target='_blank') Madalasa Venkataraman
+              tr
+                td
+                  a(href='http://iihs.co.in/about/people/shriya-anand/', target='_blank') Shriya Anand
+              tr
+                td
+                  a(href='http://iihs.co.in/about/people/neha-sami/', target='_blank') Neha Sami

@@ -1,0 +1,30 @@
+extends layout
+
+block scripts2
+
+	script(src='/javascripts/autocomplete.min.js')
+	link(rel='stylesheet', href='/stylesheets/autocomplete.min.css')
+
+	script(src='/javascripts/search.min.js')
+	link(rel='stylesheet', href='/stylesheets/search.min.css')
+
+block content
+
+	div(id="indexMain" class="uk-cover-background" )
+	div(id="ribbon" class="uk-container-center")
+
+		div(id="search" class="uk-container-center")
+			form(action="/localities/1" id= "searchForm" class="uk-search" data-uk-search="{source:'../auto/', method:'get', minLength:2, delay:200}" )
+				input(id="searchField" class="uk-search-field" name='s' type="text" placeholder="search by landmark or locality")
+			p(id="indexOr" class="uk-container-center"): i or
+			a(id="browse" class="uk-button" href="\map") Browse Map
+
+
+	script.
+
+		$("#browse").click(function(){});
+		$("#searchForm").submit(function(){});
+
+		$(document).ready(function() {
+			$('#indexMain').animate({opacity: '0.8'}, 800);
+		});

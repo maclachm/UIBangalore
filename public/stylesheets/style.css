@@ -1,0 +1,330 @@
+h3 {
+	font-size: 1vw
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+
+}
+
+h4 {
+	font-size: 1vw
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+body {
+  padding: 50px;
+  font: 0.75vw "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: black;
+}
+
+dl.warddl {
+font:          normal 400 0.85vw  "Zenhei", sans-serif;
+}
+.mapSelect {
+	height: 15em;
+	background-color: #FFA333
+;
+	color: #fff;
+	font-face: uib;
+}
+
+.indexLogo {
+	font-size: 4em;
+}
+
+.logoCaption {
+	color: #fff;
+}
+
+
+
+#indexMain {
+	position: absolute;
+	background: url(../images/index_background-sm.jpg) 0px;
+	
+	background-repeat: no-repeat;
+	background-size: 100%;
+
+	
+	width: 95%;
+	height: 85%;
+	
+	opacity: 0.0;
+	filter: alpha(opacity=60);
+}
+
+@media
+(-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+	#indexMain {
+		background: url(../images/index_background.jpg) 0px;
+	}
+}
+
+#search {
+	margin-top: 5%;
+	margin-left: 45%;
+	width:20%;
+
+}
+
+#browse {
+
+	color: #fff;
+	background-color: #FFA333;
+	position:absolute;
+	left:48.5%;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+	-khtml-border-radius: 20px;
+}
+
+.uk-search-field {
+	background-color: #fff;
+	color: #eeeee;
+	height:35px;
+	
+}
+
+#ribbon {   
+
+	position:absolute;
+    left:0;
+    top:35%;
+    width:100%;
+    height:30%;
+    background-color: rgba(255,255,255,0.3);
+}
+
+#indexOr{
+
+	color: #fff;
+	position:relative;
+	width: 100%;
+	left:35%;
+}
+
+#searchField {
+
+	background-color: #fff;
+	width: 180%;
+
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+	-khtml-border-radius: 20px;
+}
+
+#searchForm {
+
+	left: -7%;
+	display: inline-block;
+	margin: 0 auto;
+	margin-top: 1%;
+}
+
+#footer {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer1 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer2 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer3 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#themap {
+width:100%;
+position:relative;
+float:left;
+}
+#ward_info {
+position:absolute;
+right:50px;
+float:left;
+width:17%;
+	border-radius: 5px;
+	padding:20px;
+
+
+}
+
+#box_pop{
+position:absolute;
+right:50px;
+float:left;
+width:17%;
+	border-radius: 5px;
+	padding:20px;
+}
+#title_pop{
+	position:absolute;
+	right:50px;
+	float:left;
+	width:17%;
+	padding:20px;
+    margin-top: 0;
+	border-radius: 5px;
+
+
+}
+
+.fa:before {
+visibility: visible;
+}
+.fa.fa-bus:before {
+visibility: visible;
+}
+.fa.fa-bus:before {
+visibility: visible;
+}
+.fa.fa-bus:checked:before {
+	color:#8B4513;
+}
+.fa.fa-graduation-cap:checked:before {
+	color: #1d96c1;
+}
+.fa.fa-subway:checked:before {
+	color: #8b0000;
+}
+.fa.fa-train:checked:before {
+	color: #762068;
+}
+.fa.fa-laptop:checked:before {
+	color: #674a74;
+}
+.fa.fa-shopping-cart:checked:before {
+color:#FFA333
+;
+}.fa.fa-credit-card:checked:before {
+color:#FFA333
+;
+}
+input[type=checkbox].fa{
+visibility: hidden;
+
+}
+.fa.fa-close.fa-lg:hover:before {
+color:black;
+}
+.fa.fa-close:hover:before {
+    color:whitesmoke;
+}
+.fa.fa-times:hover:before {
+	color:whitesmoke;
+}
+.fa.fa-share:hover:before {
+color:whitesmoke;
+}
+.fa.fa-angle-up:hover:before {
+	color:whitesmoke;
+}
+.fa.fa-angle-down:hover:before {
+	color:whitesmoke;
+}
+label:hover {
+cursor:pointer;
+}
+.leaflet-popup-content-wrapper {
+background:#303030;
+color:darkorange;
+}
+.leaflet-popup-tip {
+    background:#303030 ;
+}
+.leaflet-popup-title {
+    background:gray ;
+}
+
+
+.locality_button {
+display:       inline-block;
+padding:       8px 84px;
+background:    #fff;
+color:         #f90;
+font:          normal 400 1vw "Helvetica", sans-serif;
+text-align:    center;
+text-shadow:   none;
+}
+
+.search { padding: 7px 0;width:230px; height:30px; position: relative; left: 10px;float:left;line-height: 22px;}
+.search input {  position:absolute;
+	width:0px;
+	padding:5px;
+	float:Left;
+	margin-left:210px;
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+	height:20px; line-height: 18px; font-style: italic;;  font-size: 15px;outline: none; -webkit-appearance: none; border-radius: 0; border-width:0; }
+.search:hover input ,  .search input:focus { width: 200px; margin-left: 0px; }
+
+.search input:focus { }
+.srch_btn{position:absolute;right:0;}
+
+.iconCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 20px;
+    height: 20px;
+    
+    background: #fff;
+    color: #666;
+    text-align: center;
+    
+    font: 32px Arial, sans-serif;
+}
+
+.legend {
+	line-height: 18px;
+	color: #555;
+}
+.legend i {
+	width: 18px;
+	height: 18px;
+	float: left;
+	margin-right: 8px;
+	opacity: 0.7;
+}
+
+
+.school-icon {
+	background: transparent no-repeat 0 0;
+	color: #1d96c1;
+}
+
+.bus-icon {
+	background: transparent no-repeat 0 0;
+	color: #8b4513;
+}
+
+.metro-icon {
+	background: transparent no-repeat 0 0;
+	color:darkred;
+}
+
+.it-icon {
+	background: transparent no-repeat 0 0;
+	color: #430074;
+}

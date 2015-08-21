@@ -1,0 +1,74 @@
+extends layout
+
+block scripts
+
+block content
+
+	h1(class="uk-h2")  Locality and Landmark List
+		ul(class="uk-pagination") !{query}
+			if current != 1
+				li: a(href="./"+1+"?s="+query) 1
+				if current > 4
+					li(class="uk-disabled") ... 
+
+			- var n = current - 2
+			
+			while n < current && n > 0
+				if n != 1
+					li: a(href="./" + n+"?s="+query) #{n}
+				- n++
+
+			li(class="uk-active"): span(href="./"+current+"?s="+query) !{current}
+			- var n = 1
+
+			while n < 3
+				- var c = parseInt(current)+n
+				if c < pages
+					li: a(href="./"+c+"?s="+query) #{c}
+				- n++
+			if current != pages
+				if current < pages - 3
+					li(class="uk-disabled") ...
+				li: a(href="./"+pages+"?s="+query) !{pages}
+
+	div(class="uk-grid")
+		div(class="uk-width-1-2")
+			h2(class="uk-h3") Localities
+			ul(class="uk-list")
+
+				each val in localities
+					li: a(href='/map/point/' + val.name + '/' + JSON.parse(val.geom).coordinates[0]+'/'+JSON.parse(val.geom).coordinates[1]) #{val.name}
+		div(class="uk-width-1-2")
+			h2(class="uk-h3")  Landmarks
+			ul(class="uk-list")
+				each val in landmarks
+					li
+						a(href='/map/point/' + val.name + '/' + JSON.parse(val.geom).coordinates[0]+'/'+JSON.parse(val.geom).coordinates[1]) #{val.name}, #{val.text}
+
+
+	ul(class="uk-pagination")
+
+		if current != 1
+			li: a(href="./"+1) 1
+			if current > 4
+				li(class="uk-disabled") ... 
+
+		- var n = current - 2
+		
+		while n < current && n > 0
+			if n != 1
+				li: a(href="./" + n) #{n}
+			- n++
+
+		li(class="uk-active"): span(href="./"+current+"?s="+query) !{current}
+		- var n = 1
+
+		while n < 3
+			- var c = parseInt(current)+n
+			if c < pages
+				li: a(href="./"+c+"?s="+query) #{c}
+			- n++
+		if current != pages
+			if current < pages - 3
+				li(class="uk-disabled") ...
+			li: a(href="./"+pages) !{pages}

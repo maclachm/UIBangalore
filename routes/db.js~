@@ -1,0 +1,69 @@
+var pg = require('pg')
+var express = require('express');
+var router = express.Router();
+
+var conString = "postgres://postgres:postgres@localhost:5432/urbaninformatics"
+
+module.exports = {
+	//can pass empty values array if no paramaters are supplied
+	query: function(text, values, cb) {
+      pg.connect(conString, function(err, client, done) {
+        client.query(text, values, function(err, result) {
+          done();
+	  console.log(done);
+          cb(err, result);
+        })
+      });
+   }
+}
+
+/*
+router.get('/:areaType/:constraint/:target/:select', function (req, res, next) {
+	var areas = ['DRO', 'Ward', 'SRO', 'Locality', 'Landmark'];
+	var constraints = ['equal', 'similar'] //add more
+
+	tables = {'DRO':'dro_data', 'Locality':'localities_data'}
+
+	if (areas.indexOf(req.params.area)==-1){
+		res.send('Wrong area type')
+	}
+
+	if (constraints.indexOf(req.params.constraint)==-1){
+		res.send('Wrong constraint')
+	}
+
+	var area = req.params.area;
+	//var constraint = req.params.constraint;
+
+	str = 'SELECT $1 from $2 where $3 $4 $5';
+	par = ['*',tables.area, dro_name, '=',  req.params.target];
+	var t = []
+  	dbReq(str, par)
+  	next();
+}, function (req, res) {
+  res.JSON(t);
+});
+
+
+/*
+var express = require('express');
+var app = express();
+app.get('/listCities/:country/:state', function(request, response){
+var country = request.params.country;
+var state = request.params.state;
+response.end("You asked for country: " + country + " and state: " +
+state);
+});
+app.listen(8080);
+GET /listCities/usa/ohio
+// You asked for country: usa and state: ohio
+GET /didnt/define/this
+// Cannot GET /didnt/define/this
+GET /listCities // note missing arguments
+// Cannot GET /listCities
+*/
+
+
+
+
+

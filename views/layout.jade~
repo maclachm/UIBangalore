@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+
+    link(rel='stylesheet', href='/stylesheets/uikit.min.css')
+    link(rel='stylesheet', href='/stylesheets/leaflet.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/uibangalore.css')
+
+    script(src='/javascripts/jquery-2.1.3.min.js')
+    script(src='/javascripts/uikit.min.js')
+    
+  body
+
+
+
+    nav(class="uk-navbar" id="primaryNav" data-uk-scrollspy="{cls:'uk-animation-slide-bottom', target:'a', delay:100}")
+      a(class="uk-navbar-brand" href='/')
+        strong
+          font(size='5') Urban Informatics
+      ul(class="uk-navbar-nav" style="float:right" )
+        li(class="uk-navbar-nav"): a(href='/about')
+          b about
+        li(class="uk-navbar-nav"): a(href='/methodology') 
+          b methodology
+        li(class="uk-navbar-nav"): a 
+          b contact us
+
+  hr
+  block scripts
+  block content
+  block map

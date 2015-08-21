@@ -1,0 +1,34 @@
+extends layout
+
+block scripts
+
+	script(src='/javascripts/autocomplete.min.js')
+	link(rel='stylesheet', href='/stylesheets/autocomplete.min.css')
+
+	script(src='/javascripts/search.min.js')
+	link(rel='stylesheet', href='/stylesheets/search.min.css')
+
+block content
+
+	div(id="indexMain" class="uk-cover-background" )
+	div(id="ribbon" class="uk-container-center")
+	
+		div(id="search" class="uk-container-center")
+			form(id= "searchForm" class="uk-search" data-uk-search="{source:'../auto/', method:'get', minLength:2, delay:200}" )
+				input(id="searchField" class="uk-search-field" type="text" placeholder="search by landmark or locality")
+			p(id="indexOr" class="uk-container-center" style="text-align:centre"): i or
+			button(id="browse" class="uk-button" style="position:centre") Browse Map
+
+
+	script.
+
+		$("#browse").click(function(){});
+		$("#searchForm").submit(function(){});
+
+		$(".uk-autocomplete").on('show.uk.autocomplete', function(event, data, aco){
+			//var link = jade.compile('li a See List')
+			var link = '<li><a href="./">See All</a></li>'
+			$("#autoList").append(link)
+		});
+		
+

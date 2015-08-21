@@ -1,0 +1,43 @@
+var express = require('express');
+var router = express.Router();
+var db = require('./db')
+
+router.use(express.static(__dirname + '/public'));
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Urban Informatics Bangalore' });
+});
+
+//autocomplete
+router.get('/auto/', function(req, res){
+	//search landmarks & localities for autocorrect matches
+	var limit = 7 //autocomplete limit
+	var query = {}
+	query.text = "SELECT title, concat('/map/point/', title) AS url, text FROM (SELECT name AS title, 'landmark' AS text FROM landmarks WHERE name ~* $1 UNION SELECT name AS title, 'locality' AS text FROM localities landmarks WHERE name ~* $1) AS q1 order by title <-> $1 LIMIT $2";
+	query.values = [req.query.search, limit];
+
+	db.query(query.text, query.values, function(err, data){
+		//store results in result.results for search & autocomplete
+		var result = {};
+		result.results = data.rows;
+
+		res.json(result);
+	});
+
+});
+
+//info pages
+
+router.get('/methodology', function(req, res){
+	res.render('methodology')
+});
+
+router.get('/about', function(req, res){
+	res.render('about')
+});
+
+router.get('/chart', function(req, res){
+	res.render('chart')
+});
+module.exports = router;

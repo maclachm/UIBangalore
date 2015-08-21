@@ -1,0 +1,214 @@
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: black;
+}
+
+dt {
+font:          normal 400 18px/1 "Zenhei", sans-serif;
+}
+.mapSelect {
+	height: 15em;
+	background-color: #DD8B12;
+	color: #fff;
+	font-face: uib;
+}
+
+.indexLogo {
+	font-size: 4em;
+}
+
+.logoCaption {
+	color: #fff;
+}
+
+#indexMain {
+	position: absolute;
+	background: url(../images/index_background.jpg) 0px;
+	
+	background-repeat: no-repeat;
+	background-size: 100%;
+
+	
+	width: 95%;
+	height: 85%;
+	
+	opacity: 0.8;
+	filter: alpha(opacity=60);
+}
+
+#search {
+	margin-top: 5%;
+	margin-left: 45%;
+	width:20%;
+
+}
+
+#browse {
+
+	color: #fff;
+	background-color: #DD8B12;
+	position:absolute;
+	left:48.5%;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+	-khtml-border-radius: 20px;
+}
+
+.uk-search-field {
+	background-color: #fff;
+	color: #eeeee;
+	height:35px;
+	
+}
+
+#ribbon {   
+
+	position:absolute;
+    left:0;
+    top:35%;
+    width:100%;
+    height:30%;
+    background-color: rgba(255,255,255,0.3);
+}
+
+#indexOr{
+
+	color: #fff;
+	position:relative;
+	width: 100%;
+	left:30%;
+}
+
+#searchField {
+
+	background-color: #fff;
+	width: 180%;
+
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+	-khtml-border-radius: 20px;
+}
+
+#searchForm {
+
+	left: -7%;
+	display: inline-block;
+	margin: 0 auto;
+	margin-top: 1%;
+}
+
+#footer {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer1 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer2 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#footer3 {
+background-color:#303030;
+color:#fff;
+clear:both;
+text-align:left;
+padding:5px;	 	 
+}
+#themap {
+width:100%;
+position:relative;
+float:left;
+}
+#ward_info {
+position:absolute;
+right:2.7%;
+float:left;
+width:17%;
+}
+
+#stack{
+position:absolute;
+right:2.7%;
+float:left;
+width:17%;
+}
+
+.fa:before {
+visibility: visible;
+}
+.fa.fa-bus:before {
+visibility: visible;
+}
+.fa.fa-bus:checked:before {
+color:orange;
+}
+.fa.fa-graduation-cap:checked:before {
+color:orange;
+}
+.fa.fa-subway:checked:before {
+color:orange;
+}
+.fa.fa-train:checked:before {
+color:orange;
+}
+.fa.fa-laptop:checked:before {
+color:orange;
+}
+.fa.fa-shopping-cart:checked:before {
+color:orange;
+}
+.fa.fa-credit-card:checked:before {
+color:orange;
+}
+input[type=checkbox].fa{
+visibility: hidden;
+
+}
+.fa.fa-close:hover:before {
+color:black;
+}
+.fa.fa-share:hover:before {
+color:black;
+}
+label:hover {
+cursor:pointer;
+}
+.custom .leaflet-popup-content-wrapper {
+background:#303030;
+color: orange;
+}
+.leaflet-popup-tip {
+    background:#303030 ;
+}
+.leaflet-popup-title {
+    background:gray ;
+}
+
+
+.locality_button {
+display:       inline-block;
+padding:       8px 84px;
+background:    #fff;
+color:         #f90;
+font:          normal 400 18px/1 "Zenhei", sans-serif;
+text-align:    center;
+text-shadow:   none;
+}

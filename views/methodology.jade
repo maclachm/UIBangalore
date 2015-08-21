@@ -1,0 +1,82 @@
+doctype html
+html
+    head
+        title Methodology
+        link(rel='stylesheet', href='/stylesheets/uikit.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/uibangalore.css')
+        script(src='/javascripts/jquery-2.1.3.min.js')
+        script(src='/javascripts/uikit.min.js')
+        // Accordion CSS
+        link(rel='stylesheet', type='text/css', href='/stylesheets/accordion.css')
+        // Accordion Javascript
+        script(src='/javascripts/accordion.min.js')
+    body
+        nav(class="uk-navbar" id="primaryNav" data-uk-scrollspy="{cls:'uk-animation-slide-bottom', target:'a', delay:100}")
+            a(class="uk-navbar-brand" href='/')
+                strong
+                    font(size='5') Urban Informatics
+            ul(class="uk-navbar-nav" style="float:right" )
+                block icon
+                li(class="uk-navbar-nav"): a(href='/about')
+                    b about
+                li(class="uk-navbar-nav"): a(href='/methodology')
+                    b methodology
+                li(class="uk-navbar-nav"): a(href='/contact')
+                    b contact us
+
+        hr
+        p
+        .uk-accordion(data-uk-accordion='{collapse: false}')
+            h3.uk-accordion-title Data Dictionary
+            .uk-accordion-content
+                ul
+                    li
+                        strong Listing value
+                        |  is the advertised cost of the property. These values are open-source and are reported by websites rather than calculated by our team.
+                    p
+                    li
+                        strong Market value
+                        |  is the appraised value of the property. We obtained this data from a private company that agreed to share its survey-derived data with IIT-B. Our team calculated the average market values.
+                    p
+                    li
+                        strong Registration
+                        |  or
+                        strong consideration value
+                        |  is the reported price paid for a property. Our data is obtained from government sources and includes the number of registered apartments per locality. Our team used the 90th percentile of consideration values for analysis to limit outliers, so no median value is included in our analysis.
+                    p
+                    li
+                        strong Guidance value
+                        |  is the minimum property value per area set by one of 41 sub-registrar offices (SRO) in Bangalore. This data comes from government sources. We calculated the
+                        span(data-uk-tooltip='', title='Most frequently recurring value')
+                            strong mode
+                        |  of reported values to best catch the true value. Our team assigned points to each of the localities in Bangalore since accurate locality boundaries are not available. Each point contains guidance values for that locality based on the underlying SRO boundaries.
+                    p
+                    li
+                        strong Localities
+                        |  are the smallest division of Bangalore. Our data were compiled from property-searching websites. They are not official but guidance values are reported at this level. Our team represented localities as points (rather than polygons) since localities have no official boundaries.
+            h3.uk-accordion-title Unit of Analysis
+            .uk-accordion-content
+                | Our team chose to use apartments as the units of analysis for three reasons.
+                p
+                ol
+                    li
+                        | A prior pilot study performed by the
+                        a(href='http://www.iimb.ernet.in/initiatives/iimb-creri', target='_blank') Century Real Estate Research Initiative (CRERI)
+                        |  determined that apartments account for about 30 percent of all property registrations in Bangalore.
+                    p
+                    li
+                        | Apartments are the largest growth sector in property types (other sectors are land, village, and individual properties).
+                    p
+                    li
+                        | Apartments have clearly-defined guidance values; unlike apartment complexes, localities do not have defined boundaries so guidance values are often a matter of debate.
+            h3.uk-accordion-title Data Scope
+            .uk-accordion-content
+                | Our data is from the last quarter of 2014, the most recent time period that verified values are available. Ranges, minimums, maximums, and averages are available for all four sets of values except for medians for consideration values.
+            h3.uk-accordion-title Additional Desirables
+            .uk-accordion-content
+                ul
+                    li Additional verified apartment data
+                    li Additional desirables include charts that outline pricing trends by locality
+                    li
+                        | Data for building age, number of units, area growth trends, and the number of HBK for additional search options

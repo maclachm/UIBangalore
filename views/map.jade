@@ -1,0 +1,444 @@
+extends layout
+
+block scripts
+
+	script(src="/javascripts/leaflet.js")
+	//script(src='/jquery-ui.js')
+	script(src='/javascripts/jquery-ui.js')
+
+	link(rel='stylesheet', href='/stylesheets/jquery-ui.min.css')
+	link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+	link(rel='stylesheet', href='/stylesheets/style.css')
+
+
+block scripts2
+	script(src="/javascripts/map.public.js")
+	script(src='/javascripts/leaflet.markercluster.js')
+	script(src="/javascripts/chroma.min.js")
+	script(src="/javascripts/leaflet.awesome-markers.min.js")
+	link(rel='stylesheet', href='/stylesheets/leaflet.awesome-markers.css')
+	link(href='/stylesheets/MarkerCluster.css' rel='stylesheet')
+
+
+block icon
+	li(class="uk-navbar-nav"): a()
+		.search
+			form(action="/localities/1", class="uk-search1" name='SearchForm', data-uk-search="{source:'../auto/', method:'get', minLength:2, delay:200}")
+				input#SearchForm(class="uk-search-field1" type='text', name='s', maxlength='64', placeholder='Search')
+				.srch_btn(onclick='SearchForm.submit()')
+					i.fa.fa-search
+
+
+block map
+
+	div(class="uk-grid uk-grid-small" id="themap")
+		div(class="uk-width-4-4") 
+			#map()
+	div(id="ward_info" style="background-color:#FFA333;display:none;color:white")
+		ul(class="uk-navbar-nav close_button" style="color:white;position:absolute;top:2%;right:0%" )
+			li(class="uk-navbar-nav").fa.fa-close.fa-lg &nbsp
+		h3(style="color:white")
+			b &nbsp &nbsp
+				span(id="sidebar-data-name") Select A Ward
+		hr(style="size:1px;height:1px;width:100%;color:white;border-color:white;background-color:white;")
+	
+		div(style="width:60%;float:left;color:white")
+			dl.warddl
+				dt &nbsp &nbsp Area
+				dt &nbsp
+				dt &nbsp &nbsp Population
+				dt &nbsp
+				dt &nbsp &nbsp Population Density
+				dt &nbsp
+				dt &nbsp &nbsp Female Population
+				dt &nbsp
+				dt &nbsp &nbsp Male Population
+				dt &nbsp
+				dt &nbsp &nbsp Guidance Value
+				dt &nbsp &nbsp &nbsp
+					i (Approx)
+				dt &nbsp
+				dt &nbsp &nbsp Averages
+				dt &nbsp &nbsp
+				dt &nbsp &nbsp Market Value:
+				dt &nbsp
+				dt &nbsp &nbsp Listing Value:
+				dt &nbsp
+				dt &nbsp &nbsp Registration Value:
+
+			dl
+		div(style="width:40%;float:left;color:white")
+			dl.warddl
+				dt &nbsp &nbsp
+					span(id="sidebar-data-area")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-pop")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-dens")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-pop-f")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-pop-m")
+				dt &nbsp
+				dt &nbsp &nbsp 
+				dt &nbsp &nbsp
+					span(id="sidebar-data-gv")
+				dt &nbsp
+				dt &nbsp &nbsp 
+				dt &nbsp &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-mv")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-lv")
+				dt &nbsp
+				dt &nbsp &nbsp
+					span(id="sidebar-data-rv")
+			dl
+		hr(style="size:1px;height:1px;width:100%;color:white;border-color:white;background-color:white;")
+
+	div( id="stack" style="display:none;background-color:#303030")
+		div(id="title_pop" style="display:none;background-color:#303030")
+			h4(style="color:darkorange;float:left;padding:0;margin:0")
+				b(class="box_pop_apt_no") Apartment #
+			ul(class="uk-navbar-nav " style="color:darkorange;float:right" )
+				li(class="uk-navbar-nav plus_pop")
+					input(type='checkbox' style="color:darkorange").fa.fa-angle-down.fa-lg
+				li(class="uk-navbar-nav close_button_pop" style="color:darkorange").fa.fa-times &nbsp
+
+		div(id="box_pop" style="color:darkorange;display:none;background-color:#303030")
+			h4(style="color:darkorange;float:left;padding:0;margin:0")
+				b(class="box_pop_apt_no") Apartment #
+			ul(class="uk-navbar-nav " style="color:darkorange;float:right" )
+				li(class="uk-navbar-nav minus_pop")
+					input(type='checkbox' style="color:darkorange").fa.fa-angle-up.fa-lg
+				li(class="uk-navbar-nav close_button_pop" style="color:darkorange").fa.fa-times &nbsp
+			hr(style="size:1px;width:100%;color:white;border-color:white;background-color:white;")
+
+			div(style="width:60%;float:left;color:white")
+				dl
+
+					dt &nbsp &nbsp Guidance Value:
+					dt &nbsp
+					dt &nbsp &nbsp Market Value:
+					dt &nbsp
+					dt &nbsp &nbsp Listing Value:
+					dt &nbsp
+					dt &nbsp &nbsp Registration Value:
+
+				dl
+			div(style="width:40%;float:left;color:white")
+				dl
+					dt(id="box_pop_gv") &nbsp &nbsp 123
+					dt &nbsp
+					dt(id="box_pop_mv") &nbsp &nbsp 415
+					dt &nbsp
+					dt(id="box_pop_lv") &nbsp &nbsp 161
+					dt &nbsp
+					dt(id="box_pop_rv") &nbsp &nbsp 718
+				dl
+			hr(style="size:1px;width:100%;color:white;border-color:white;background-color:white;")
+			a(href="/chart" class="chartlink" style="color:white" onClick="return popup(this, 'chart')")
+				i See graph
+
+	div( id="footer1" style="float:bottom;display:none;")
+		label
+			input(type='checkbox' class='property_values' id='guidance_value')
+			| Guidance Value
+		&nbsp
+		label
+			input(type='checkbox' class='property_values' id='market_value')
+			| Market Value
+		&nbsp
+		label
+			input(type='checkbox' class='property_values' id='listing_value')
+			| Listing Value
+		&nbsp 
+		label
+			input(type='checkbox' class='property_values' id='registration_value')
+			| Registration Value
+		&nbsp &nbsp &nbsp &nbsp
+		p
+			label(for="amount") Price range:
+			input(type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold; background-color:#303030")
+
+		div(id="slider-range" class='uk-width-1-3')
+
+		<hr>
+
+	div( id="footer2" style="float:bottom;display:none;")
+		label
+			input(type='checkbox'  class='check_box amenity' id="schools").fa.fa-graduation-cap
+			| &nbsp Schools
+		&nbsp 
+		label
+			input(type='checkbox'  class='check_box amenity' id="major_bus_stands").fa.fa-bus
+			| &nbsp Major Bus Stands
+		&nbsp 
+		label
+			input(type='checkbox'  class='check_box amenity' id="metro_stations").fa.fa-subway
+			| &nbsp Metro Stations
+		&nbsp
+		label 
+			input(type='checkbox'  class='check_box amenity' id="it_parks").fa.fa-laptop
+			| &nbsp IT Parks
+		&nbsp
+
+		<hr>
+		
+	div( id="footer3" style="float:bottom;display:none;")
+		label
+			input(type='checkbox'  class='check_box' id='check_box_Ward')
+			| Wards
+		&nbsp
+		label 
+			input(type='checkbox'  class='check_box' id='check_box_DRO')
+			| DRO
+		&nbsp
+		label
+			input(type='checkbox'  class='check_box' id='check_box_SRO')
+			| SRO
+		&nbsp
+		<hr>
+
+	
+
+	div( id="footer" style="float:bottom")
+		
+		input#check1(type='checkbox' name='ward')
+		label(for='check1') District
+		&nbsp &nbsp
+		input#check2(type='checkbox' name='amenity')
+		label(for='check2') Amenity
+		&nbsp &nbsp
+		input#check3(type='checkbox' class='check_box' name='price')
+		label(for='check3') Apartments
+
+
+	script.
+
+		function popup(mylink, windowname) {
+			if (!window.focus)return true;
+			var href;
+			if (typeof(mylink) == 'string')
+				href = mylink;
+			else
+				var val = "/chart/";
+				var name = $(".box_pop_apt_no").text().split(' ')[2];
+				href = val+name;
+			window.open(href, windowname, 'width=680,height=450,left=450,top=200,resizable=yes,location=no,');
+			return false;
+		}
+
+
+		document.addEventListener("DOMContentLoaded", function (event) {
+			//do work
+
+			map = init(!{attributes});
+			layerLoad('Ward', function(layer){/*do nothing*/}); //load ward early
+
+			$("input[name='price']").click(function() {
+				$("#footer1").toggle();
+			});
+			$("input[name='amenity']").click(function() {
+				$("#footer2").toggle();
+			});
+			$("input[name='ward']").click(function() {
+				$("#footer3").toggle();
+			});
+			$(".close_button").click(function() {
+				$("#ward_info").hide();
+			});
+			$(".close_button_pop").click(function() {
+				$("#stack").hide();
+			});
+			$(".minus_pop").click(function() {
+				$("#box_pop").hide();
+				$("#title_pop").show();
+
+			});
+			$(".plus_pop").click(function() {
+				$("#box_pop").show();
+				$("#title_pop").hide();
+
+			});
+			map.on('zoomend', function () {
+				if (map.getZoom() > 13 && map.getZoom() < 15 && map.hasLayer(map.layers['Ward'])) {
+					$("#ward_info").show();
+					map.closePopup();
+				}
+				if (map.getZoom() <= 13 || map.getZoom() >= 15)
+				{
+					$("#ward_info").hide();
+				}
+			});
+			map.on('popupopen', function(evt) {
+				var currentPopup = evt.popup;
+				if (map.getZoom() > 13 && map.getZoom() < 15 && map.hasLayer(map.layers['Ward'])) {
+					//$("#ward_info").show();
+					//map.closePopup();
+				}
+
+				$('.close_popup').click(function(e){
+
+					if (currentPopup != null)currentPopup._source.closePopup();
+				});
+				$('.popout').click(function(e){
+					if (currentPopup != null)currentPopup._source.closePopup();
+
+					var htmlContent = e.target.parentElement.parentElement.children
+					//var.replace(/[^0-9\.]+/g, '');
+
+					//$('#box_pop').html(currentPopup.getContent())
+					var htmlL = htmlContent.length;
+					$('.box_pop_apt_no').html(htmlContent[3]);
+					$('#box_pop_gv').html(htmlContent[htmlL-6].innerHTML.replace(/[^0-9\.]+/g, ''));
+					$('#box_pop_mv').html(htmlContent[htmlL-5].innerHTML.replace(/[^0-9\.]+/g, ''));
+					$('#box_pop_lv').html(htmlContent[htmlL-4].innerHTML.replace(/[^0-9\.]+/g, ''));
+					$('#box_pop_rv').html(htmlContent[htmlL-3].innerHTML.replace(/[^0-9\.]+/g, ''));
+
+					$("#stack").show();
+					$("#box_pop").show();
+				});
+			});
+			$(window).on("resize", function () {
+			$("#map").height($(window).height() / 1.25).width($('#themap').width());
+			map.invalidateSize();
+			}).trigger("resize");
+
+			//UI functions
+
+			$(function() {
+				$( "#check1" ).button();
+				$( "#check2" ).button();
+				$( "#check3" ).button();
+			});
+
+			$('#check_box_Ward').click(function(w){
+				$('#check_box_SRO').removeAttr('checked');
+				$('#check_box_DRO').removeAttr('checked');
+
+			})
+			$('#check_box_SRO').click(function(w){
+				$('#check_box_Ward').removeAttr('checked');
+				$('#check_box_DRO').removeAttr('checked');
+
+			})
+			$('#check_box_DRO').click(function(w){
+				$('#check_box_SRO').removeAttr('checked');
+				$('#check_box_Ward').removeAttr('checked');
+
+			})
+
+			$('#market_value').click(function(w){
+				$('#guidance_value').removeAttr('checked');
+				$('#listing_value').removeAttr('checked');
+				$('#registration_value').removeAttr('checked');
+
+				if ( $('#market_value').is(':checked') ) {
+					choroplethAll('mv');
+				}
+				else{
+					if (! $('.property_values').is(':checked') )  choroplethAll();
+				}
+
+
+			})
+			$('#guidance_value').click(function(w){
+				$('#market_value').removeAttr('checked');
+				$('#listing_value').removeAttr('checked');
+				$('#registration_value').removeAttr('checked');
+
+				if ( $('#guidance_value').is(':checked') ) {
+					choroplethAll('gv');
+				}
+				else{
+					if (! $('.property_values').is(':checked') )  choroplethAll();
+				}
+
+			})
+			$('#listing_value').click(function(w){
+				$('#guidance_value').removeAttr('checked');
+				$('#market_value').removeAttr('checked');
+				$('#registration_value').removeAttr('checked');
+
+				if ( $('#listing_value').is(':checked') ) {
+					choroplethAll('lv')
+				}
+				else{
+					if (! $('.property_values').is(':checked') )  choroplethAll();
+				}
+
+			})
+
+			$('#registration_value').click(function(w){
+				$('#guidance_value').removeAttr('checked');
+				$('#listing_value').removeAttr('checked');
+				$('#market_value').removeAttr('checked');
+
+				if 	( $('#registration_value').is(':checked') ){
+					choroplethAll('rv')
+				} else {
+					if (! $('.property_values').is(':checked') )  choroplethAll();
+				}
+			})
+
+			$('.check_box').change(function(a){
+
+				var layerCheckBox = function (layer){
+					return ({
+						check_box_Ward: 'Ward',
+						check_box_SRO: 'SRO',
+						check_box_DRO: 'DRO',
+						check3: 'Apartments',
+						schools: 'Landmarks-schools',
+						major_bus_stands: 'Landmarks-majorbus',
+						metro_stations: 'Landmarks-metrostation',
+						it_parks: 'Landmarks-itparks'
+
+					}[layer]);
+				}
+
+				if ($('#'+a.target.id).attr('checked') != 'checked') {
+					var id = a.target.id;
+					$('#'+id).attr('checked',true)
+					//add the layer
+					addFeatureLayer(layerCheckBox(id));
+
+				}else{
+					var id = a.target.id;
+					$('#'+id).attr('checked',false)
+					//remove the layer
+
+					removeFeatureLayer(layerCheckBox(id))
+				}
+			});
+
+			$(function() {
+				//apartment slider
+				$( "#slider-range" ).slider({
+					change: filter,
+					range: true,
+					min: 0,
+					max: 20000,
+					values: [ 0, 20000 ],
+					slide: function( event, ui ) {
+						$( "#amount" ).val( "₹" + ui.values[ 0 ] + " - ₹" + ui.values[ 1 ] );
+					}
+				});
+				$( "#amount" ).val( "₹" + $( "#slider-range" ).slider( "values", 0 ) +
+						" - ₹" + $( "#slider-range" ).slider( "values", 1 ) );
+			});
+
+			$('.property_values').change(function(){filter()});
+		});
+
+
+
+
+
+
